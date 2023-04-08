@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Html</title>
+</head>
+<style>
+    h1{
+        text-align: center;
+    }
+    form{
+        text-align: center;
+    }
+    .butoes{
+        text-align: center;
+        margin-top: 10px;
+        padding: 10px;
+    }
+</style>
+<body>
+    <h1> welcome</h1>
+    
+    <form action="" method="post">
+        <input id="nome" type="text" placeholder="Digite seu nome">
+
+        <input id="senha" type="password" placeholder="Digite sua senha">
+        
+    </form>
+
+    <div class="butoes">
+        <button onclick="limpar()">Cancelar</button>
+
+        <button id="enviar" onclick="logar(); return false" type="submit">Enviar </button>
+    </div>
+    
+
+    <script>
+        function limpar(){
+          let nome = document.getElementById('nome')
+          let senha = document.getElementById('senha')
+            nome.value = ''
+            senha.value = ''
+        }
+        function logar(){
+            let nome = document.getElementById('nome').value 
+            let senha = document.getElementById('senha').value
+
+            if(nome != '' && senha != ''){
+                location.href = 'boas_vindas.html'
+            }
+        }
+       
+    </script>
+</body>
+</html>

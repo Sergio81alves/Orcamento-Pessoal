@@ -59,12 +59,14 @@ function cadastrarDespesa(){
         valor.value
     )
     if(despesa.validarDados()){
-        //db.gravar(despesa)
+        db.gravar(despesa)
         //return sucesso
         console.log('sucesso')
+        $('#sucessoDeGravacao').modal('show')
     }else {
        // return falha
        console.log('falha')
+       $('#erroDeGravacao').modal('show')
     }
     
 }

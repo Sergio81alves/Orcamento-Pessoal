@@ -8,8 +8,23 @@ class Despesa{
         this.valor = valor
     }
 }
+class Bd{
+    getProximoId(){
+        //get serve para guardar
+        let proximoId = localStorage.getItem('id') //nul
+        console.log(proximoId)
+    }
 
+//transformando meus dados em json
+    gravar(d){
+    //Aqui é o identificador e o d é quem eu quero transformar em json
+    //localStorage.setItem('despesa', JSON.stringify(d))
 
+    this.getProximoId()
+    }
+}
+
+let db = new Bd()
 
 function cadastrarDespesa(){
     let ano = document.getElementById('ano')
@@ -28,10 +43,5 @@ function cadastrarDespesa(){
         valor.value
     )
 
-    gravar(despesa)
-}
-//transformando meus dados em json
-function gravar(d){
-    //Aqui é o identificador e o d é quem eu quero transformar em json
-    localStorage.setItem('despesa', JSON.stringify(d))
+    db.gravar(despesa)
 }

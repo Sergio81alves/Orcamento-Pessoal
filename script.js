@@ -9,18 +9,26 @@ class Despesa{
     }
 }
 class Bd{
+
+    constructor(){
+     let id = localStorage.getItem('id')   
+     if(id === null){
+        localStorage.setItem('id', 0)
+     }
+    }
     getProximoId(){
         //get serve para guardar
         let proximoId = localStorage.getItem('id') //nul
-        console.log(proximoId)
+        return parseInt(proximoId) +1
     }
 
 //transformando meus dados em json
     gravar(d){
     //Aqui é o identificador e o d é quem eu quero transformar em json
-    //localStorage.setItem('despesa', JSON.stringify(d))
-
-    this.getProximoId()
+    
+    let id = this.getProximoId()
+    localStorage.setItem(id, JSON.stringify(d))
+    localStorage.setItem('id', id)
     }
 }
 

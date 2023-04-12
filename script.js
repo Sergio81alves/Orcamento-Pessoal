@@ -59,14 +59,19 @@ function cadastrarDespesa(){
         valor.value
     )
     if(despesa.validarDados()){
-        db.gravar(despesa)
-        //return sucesso
-        console.log('sucesso')
-        $('#sucessoDeGravacao').modal('show')
+       // db.gravar(despesa)
+        console.log('sucesso');
+        document.getElementById('gravacaoTitle').innerHTML='Sucesso na Gravação';
+        document.getElementById('modal-title').className = 'modal-header text-success';
+        document.getElementById('modalBody').innerHTML="Gravação bem Sucedida";
+        $('#gravacaoDispesa').modal('show')
     }else {
        // return falha
        console.log('falha')
-       $('#erroDeGravacao').modal('show')
+       document.getElementById('gravacaoTitle').innerHTML='Erro na Gravação';
+       document.getElementById('modal-title').className = 'modal-header text-danger';
+       document.getElementById('modalBody').innerHTML="Por favor preencher todos os campos";
+       $('#gravacaoDispesa').modal('show')
     }
     
 }

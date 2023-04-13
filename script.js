@@ -59,12 +59,14 @@ function cadastrarDespesa(){
         valor.value
     )
     if(despesa.validarDados()){
-       // db.gravar(despesa)
+        db.gravar(despesa)
         console.log('sucesso');
         document.getElementById('gravacaoTitle').innerHTML='Sucesso na Gravação';
         document.getElementById('modal-title').className = 'modal-header text-success';
         document.getElementById('modalBody').innerHTML="Gravação bem Sucedida";
         $('#gravacaoDispesa').modal('show')
+        document.getElementById('botao-voltar').innerHTML="Fechar"
+        document.getElementById('botao-voltar').className = "botao-voltar btn-success"
     }else {
        // return falha
        console.log('falha')
@@ -72,6 +74,9 @@ function cadastrarDespesa(){
        document.getElementById('modal-title').className = 'modal-header text-danger';
        document.getElementById('modalBody').innerHTML="Por favor preencher todos os campos";
        $('#gravacaoDispesa').modal('show')
+       document.getElementById('botao-voltar').innerHTML="Voltar e corrigir"
+        document.getElementById('botao-voltar').className = "botao-voltar btn-danger"
+       
     }
     
 }

@@ -33,11 +33,20 @@ class Bd{
 //transformando meus dados em json
     gravar(d){
     //Aqui é o identificador e o d é quem eu quero transformar em json
-    
     let id = this.getProximoId()
     localStorage.setItem(id, JSON.stringify(d))
     localStorage.setItem('id', id)
     }
+
+    recuperarTodosRegistros(){
+       let id = localStorage.getItem('id')
+       for(let i = 1; i <= id; i++){
+        //recuperando a dispesa
+        let despesa = localStorage.getItem(i)
+        console.log(despesa)
+       }
+    }
+
 }
 
 let db = new Bd()
@@ -78,5 +87,8 @@ function cadastrarDespesa(){
         document.getElementById('botao-voltar').className = "botao-voltar btn-danger"
        
     }
-    
+}
+
+function carregaListaDispesas(){
+    db.recuperarTodosRegistros()
 }

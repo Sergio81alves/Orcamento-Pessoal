@@ -17,6 +17,7 @@ class Despesa{
     }
 }
 class Bd{
+    
 
     constructor(){
      let id = localStorage.getItem('id')   
@@ -39,12 +40,20 @@ class Bd{
     }
 
     recuperarTodosRegistros(){
+        let despesas = Array()
+        
+
        let id = localStorage.getItem('id')
        for(let i = 1; i <= id; i++){
         //recuperando a dispesa
-        let despesa = localStorage.getItem(i)
-        console.log(despesa)
+        let despesa = JSON.parse(localStorage.getItem(i))
+        if(despesa === null){
+            continue
+        }
+        despesas.push(despesa)
        }
+       return despesas
+      
     }
 
 }
@@ -58,15 +67,16 @@ function cadastrarDespesa(){
     let tipo = document.getElementById('tipo')
     let descricao = document.getElementById('descricao')
     let valor = document.getElementById('valor')
-
     let despesa = new Despesa(
         ano.value,
         mes.value,
         dia.value,
-        descricao.value,
         tipo.value,
+        descricao.value,
         valor.value
     )
+    
+    
     if(despesa.validarDados()){
         db.gravar(despesa)
         console.log('sucesso');
@@ -85,10 +95,40 @@ function cadastrarDespesa(){
        $('#gravacaoDispesa').modal('show')
        document.getElementById('botao-voltar').innerHTML="Voltar e corrigir"
         document.getElementById('botao-voltar').className = "botao-voltar btn-danger"
-       
     }
+   
 }
 
 function carregaListaDispesas(){
-    db.recuperarTodosRegistros()
+    let despesas = Array()
+   despesas = db.recuperarTodosRegistros()
+   let listaDespesas = document.getElementById('listaDespesas')
+
+   despesas.forEach(function(d) {
+
+   //criando linha(tr)
+   let linha = listaDespesas.insertRow()
+
+   //criando colunas(td)
+   linha.insertCell(0).innerHTML = `${d.dia}/${d.mes}/${d.ano}`
+
+
+   //ajustar tipo
+   switch(d.tipo){
+    case "1": d.tipo = 'Alimentação'
+      break
+    case "2": d.tipo = 'Educação'
+      break
+    case "3": d.tipo = 'Lazer'
+      break
+    case "4": d.tipo = 'Saúde'
+      break
+    case "5": d.tipo = 'Transporte'
+      break
+   }
+   
+   linha.insertCell(1).innerHTML = d.tipo
+   linha.insertCell(2).innerHTML = d.descricao
+   linha.insertCell(3).innerHTML = d.valor
+});
 }

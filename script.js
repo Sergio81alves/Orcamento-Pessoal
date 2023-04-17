@@ -86,6 +86,12 @@ function cadastrarDespesa(){
         $('#gravacaoDispesa').modal('show')
         document.getElementById('botao-voltar').innerHTML="Fechar"
         document.getElementById('botao-voltar').className = "botao-voltar btn-success"
+        ano.value = '';
+        mes.value = '';
+        dia.value = '';
+        tipo.value = '';
+        descricao.value = '';
+        valor.value = '';
     }else {
        // return falha
        console.log('falha')

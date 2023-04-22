@@ -56,7 +56,10 @@ class Bd{
       
     }
     pesquisar(despesas){
-        console.log(despesas)
+      let despesasFiltradas = Array() 
+      despesasFiltradas = this.recuperarTodosRegistros()
+
+      console.log(despesasFiltradas)
     }
 }
 

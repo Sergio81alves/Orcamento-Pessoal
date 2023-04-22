@@ -68,12 +68,10 @@ class Bd{
       }
       //mes
       if(despesas.mes != ""){
-        console.log(" filtro de ano")
         despesasFiltradas = despesasFiltradas.filter(d => d.mes == despesas.mes)
       }
       //dia
-      if(despesas.mes != ""){
-        console.log(" filtro de mes")
+      if(despesas.dia != ""){
         despesasFiltradas = despesasFiltradas.filter(d =>  d.dia == despesas.dia)
       }
       //descricao
@@ -88,7 +86,7 @@ class Bd{
       if(despesas.valor != "") {
         despesasFiltradas = despesasFiltradas.filter(d => d.valor == despesas.valor)
       }
-      console.log(despesasFiltradas)
+      return despesasFiltradas
 
 
       //a tanta vida la fora
@@ -142,10 +140,14 @@ function cadastrarDespesa(){
    
 }
 
-function carregaListaDispesas() {
-  let despesas = Array();
-  despesas = db.recuperarTodosRegistros();
+function carregaListaDispesas(despesas = Array(), filtro = false) {
+  if(despesas.length == 0 && filtro == false){
+    despesas = db.recuperarTodosRegistros();
+  }
+  
+  //selecionando o elementos tbody da tabela
   let listaDespesas = document.getElementById("listaDespesas");
+  listaDespesas.innerHTML = ""
 
   despesas.forEach(function (d) {
     //criando linha(tr)
@@ -187,6 +189,8 @@ function pesquisarDespesas(){
     let descricao = document.getElementById('descricao').value
     let valor = document.getElementById('valor').value
 
-    let despesas =new Despesa(ano, mes, dia, tipo, descricao, valor )
-    db.pesquisar(despesas) 
+    let despesa =new Despesa(ano, mes, dia, tipo, descricao, valor )
+   
+    let despesas = db.pesquisar(despesa) 
+    this.carregaListaDispesas(despesas, true)
 }

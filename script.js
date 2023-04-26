@@ -116,7 +116,7 @@ function cadastrarDespesa(){
     
     
     if(despesa.validarDados()){
-        db.gravar(despesa)
+        db.gravar(despesa);
         console.log('sucesso');
         document.getElementById('gravacaoTitle').innerHTML='Sucesso na Gravação';
         document.getElementById('modal-title').className = 'modal-header text-success';
@@ -186,13 +186,21 @@ function carregaListaDispesas(despesas = Array(), filtro = false) {
     let btn = document.createElement('button')
     btn.className = 'btn btn-danger'
     btn. innerHTML = "<i class='fas fa-times'></i>"
-    btn.id = `id_despesa_${d.id}`
-    btn.onclick = function(){
-      //remover despesas
-      let id = this.id.replace('id_despesa_', '')
-      db.remover(id)
+    btn.id = `id_despesa_${d.id}`;
 
-      window.location.reload()
+    btn.onclick = function(){
+
+      $('#certeza').modal('show')
+      let conf = document.getElementById('confirmar')
+      if (conf == true) {
+        //remover despesas
+        //let id = this.id.replace("id_despesa_", "");
+        //db.remover(id);
+
+       // window.location.reload();
+       console.log('excluiu')
+      }
+
     }
     linha.insertCell(4).append(btn)
 
